@@ -29,17 +29,17 @@
 
   {% if solicitudes %}
     <div class="table-responsive">
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-striped align-middle">
         <thead class="table-dark">
           <tr>
             <th>Código</th>
             <th>Tipo</th>
-            <th>Forma</th>
             <th>Estado</th>
+            <th>Forma</th>
             <th>Barrio</th>
             <th>Fecha</th>
             <th>PDF</th>
-            <th>Respomder xd</th>
+            <th>Responder</th>
           </tr>
         </thead>
         <tbody>
@@ -47,11 +47,9 @@
           <tr>
             <td>{{ item.solicitud.solCodigo }}</td>
             <td>{{ item.solicitud.solTipo }}</td>
-            {% if item.solicitud.solEstado == 'Atendida' %}
-            <td style="color: red">{{ item.solicitud.solEstado }}</td>
-            {%else%}
-            <td>{{ item.solicitud.solEstado }}</td>
-            {% endif %}
+            <td class="fw-semibold {% if item.solicitud.solEstado == 'Atendida' %}text-success{% elif item.solicitud.solEstado == 'Solicitada' %}text-warning{% endif %}">
+              {{ item.solicitud.solEstado }}
+            </td>
             <td>{{ item.solicitud.solForma }}</td>
             <td>{{ item.solicitud.solBarrio }}</td>
             <td>{{ item.solicitud.solFecha }}</td>

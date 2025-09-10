@@ -1,16 +1,20 @@
 {% extends 'inicio.html' %}
-{% load static %} 
-{% block titulo %} Agregar Oficina
-{% endblock titulo %}
- {% block contenido %}
-<div>
-  <h1>AGREGE UNA OFICINA</h1>
-  <form action="" method="POST"  id="form-oficina" enctype="multypart/form-data">
-    {% csrf_token %} 
-    {{ formulario.as_p }}
-    <input type="submit" value="Agregar_oficina" />
-  </form>
+{% load static %}
+{% block titulo %} Agregar Oficina {% endblock titulo %}
+{% block contenido %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8 col-xl-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h4 mb-3">Agregar oficina</h1>
+        <form action="" method="POST" id="form-oficina" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          {{ formulario.as_p }}
+          <button type="submit">Guardar</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-    <script src="{% static 'js/index.js' %}"></script>
-
-{%endblock%}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

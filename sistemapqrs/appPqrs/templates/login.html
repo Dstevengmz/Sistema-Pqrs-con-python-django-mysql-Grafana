@@ -1,19 +1,25 @@
 {% extends 'inicio.html' %}
 {% load static %} 
-{% block titulo %} Login
-{% endblock titulo %}
- {% block contenido %}
-<div>
-  <h1>Login</h1>
-  <form  method="POST" >
-    {% csrf_token %} 
-    {{ form.as_p }}
-        <button type="submit">Entrar</button>
-  </form>
-  {% if form.errors %}
-    <p style="color: rgb(155, 15, 15);">Usuario o contraseña incorrectos.</p>
-{% endif %}
+{% block titulo %} Login {% endblock titulo %}
+{% block contenido %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h4 mb-3 text-center">Iniciar sesión</h1>
+        <form method="POST" novalidate>
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="w-100">Entrar</button>
+        </form>
+        {% if form.errors %}
+          <div class="alert alert-danger mt-3" role="alert">
+            Usuario o contraseña incorrectos.
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
-    <script src="{% static 'js/index.js' %}"></script>
-
-{%endblock%}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock %}

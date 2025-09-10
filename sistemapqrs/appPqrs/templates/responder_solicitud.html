@@ -2,18 +2,24 @@
 {% block titulo %}Responder Solicitud{% endblock %}
 
 {% block contenido %}
-<div class="container">
-  <h2>Responder Solicitud: {{ solicitud.solCodigo }}</h2>
-   {% if solicitud.solEstado == 'Solicitada' %}
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Enviar Respuesta</button>
-  </form>
-   {% else %}
-   <div class="alert alert-info mt-3">
-      Esta solicitud ya fue respondida y está en estado <strong>{{ solicitud.solEstado }}</strong>.
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h4">Responder Solicitud: {{ solicitud.solCodigo }}</h2>
+        {% if solicitud.solEstado == 'Solicitada' %}
+          <form method="POST" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Enviar Respuesta</button>
+          </form>
+        {% else %}
+          <div class="alert alert-info mt-3">
+            Esta solicitud ya fue respondida y está en estado <strong>{{ solicitud.solEstado }}</strong>.
+          </div>
+        {% endif %}
+      </div>
     </div>
+  </div>
 </div>
-   {% endif %}
 {% endblock %}

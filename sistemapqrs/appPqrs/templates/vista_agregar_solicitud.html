@@ -1,47 +1,72 @@
-{% extends 'inicio.html' %} {% load static %} {% block titulo %} Agregar
-Solicitud {% endblock titulo %} {% block contenido %}
-<div>
-  <h1>AGREGE UNA SOLICITUD</h1>
-  <form method="POST" id="form-solicitud" enctype="multipart/form-data">
-    {% csrf_token %}
+{% extends 'inicio.html' %}
+{% load static %}
+{% block titulo %} Agregar Solicitud {% endblock titulo %}
+{% block contenido %}
+<div class="row justify-content-center">
+  <div class="col-12 col-xl-10">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h4 mb-3">Crear solicitud</h1>
+        <form method="POST" id="form-solicitud" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
 
-    <p><strong>Código de Solicitud:</strong> {{ formulario.solCodigo }}</p>
+          <div class="mb-3">
+            <label class="form-label">Código de Solicitud</label>
+            {{ formulario.solCodigo }}
+          </div>
 
-    <label>Forma de la Petición:</label>
-    {{ formulario.solForma }}
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Forma de la Petición</label>
+              {{ formulario.solForma }}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Tipo de Petición</label>
+              {{ formulario.solTipo }}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Oficina de PQRS</label>
+              {{ formulario.solOficina }}
+            </div>
+          </div>
 
-    <label>Tipo de Petición:</label>
-    {{ formulario.solTipo }}
+          <div class="row g-3 mt-1">
+            <div class="col-md-6">
+              <label for="campo-barrio" class="form-label">Barrio</label>
+              <select id="campo-barrio" name="solBarrio" class="form-select">
+                <option value="">Cargando barrios...</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Nombre</label>
+              {{ formulario.solNombreCiudadano }}
+            </div>
+          </div>
 
-    <label>Oficina de PQRS:</label>
-    {{ formulario.solOficina }}
+          <div class="row g-3 mt-1">
+            <div class="col-md-6">
+              <label class="form-label">Correo</label>
+              {{ formulario.solCorreoElectronico }}
+            </div>
+          </div>
 
-    <label for="campo-barrio">Barrio:</label>
-    <select id="campo-barrio" name="solBarrio" class="form-control">
-      <option value="">Cargando barrios...</option>
-    </select>
+          <div class="mb-3 mt-2">
+            <label class="form-label">Descripción</label>
+            {{ formulario.solDescripcion }}
+          </div>
 
-    <div id="selecciones">
-      <label>Nombre:</label>
-      {{ formulario.solNombreCiudadano }}
+          <input type="hidden" name="solEstado" value="Solicitada" />
 
-      <label>Correo:</label>
-      {{ formulario.solCorreoElectronico }}
+          <div class="mb-3">
+            <label class="form-label">Adjuntar Documento</label>
+            {{ form_anexo.aneUrl }}
+          </div>
+
+          <button type="submit">Agregar Solicitud</button>
+        </form>
+      </div>
     </div>
-    <br />
-    <label>Descripción:</label>
-    {{ formulario.solDescripcion }}
-    <br />
-    <!-- {{ formulario.solEstado }} -->
-    <input type="hidden" name="solEstado" value="Solicitada" />
-    <br />
-    <h5>Adjuntar Documento:</h5>
-    {{ form_anexo.aneUrl }}
-    <br />
-    <br />
-    <input type="submit" value="Agregar Solicitud" />
-  </form>
+  </div>
 </div>
 <script src="{% static 'js/index.js' %}"></script>
-
-{%endblock%}
+{% endblock %}
